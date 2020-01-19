@@ -1,0 +1,92 @@
+import tensorflow as tf
+import keras
+
+print(tf.__version__)
+print(keras.__version__)
+
+#상수 정의
+a = tf.constant(1234)
+b = tf.constant(5000)
+
+#계산 정의
+add_op = a + b
+
+#세션시작
+sess = tf.Session()
+res = sess.run(add_op) #계산식 평가
+
+print(res)
+
+###################################
+import tensorflow as tf
+
+#상수 정의
+a = tf.constant(2) 
+b = tf.constant(3)
+c = tf.constant(4)
+
+#계산 정의
+calc1_op = a + b *c
+calc2_op = (a+b) * c
+
+#세션 시작 
+sess = tf.Session() 
+res1 = sess.run(calc1_op) #계산식 평가 
+print(res1)
+res2 = sess.run(calc2_op) #계산식 평가 
+print(res2)
+
+###################################
+import tensorflow as tf
+
+#상수 정의
+a = tf.constant(100) 
+b = tf.constant(50)
+add_op = a+ b
+
+#변수 v 선언하기
+v = tf.Variable(0) #tf.Variable은 클래스의 생성자 함수, tf.Variable(tf.zeros([]))
+
+# 변수 v에 add_op의 결과 대입하기
+let_op = tf.assign(v, add_op)
+
+#세션 시작 
+sess = tf.Session() 
+# 변수 초기화히기
+sess.run(tf.global_variables_initializer())
+#계산식 실행
+sess.run(let_op) 
+print(sess.run(v))
+
+###################################
+
+import tensorflow as tf
+
+#placeholder 정의(정수 자료형 3개를 가진 배열)
+a = tf.placeholder(tf.int32, [3]) 
+b = tf.constant(2)
+x2_op = a* b
+
+#세션 시작 
+sess = tf.Session() 
+# placeholder에 값 넣고 실행하기
+r1 = sess.run(x2_op, feed_dict = {a:[1, 2, 3]})
+print(r1)
+r2 = sess.run(x2_op, feed_dict = {a:[10, 20, 10]})
+print(r2)
+
+###########################
+import tensorflow as tf
+
+#placeholder 정의( 배열의 크기를 None으로 지정)
+a = tf.placeholder(tf.int32, [None]) 
+b = tf.constant(10)
+x10_op = a* b
+
+#세션 시작 
+sess = tf.Session() 
+# placeholder에 값 넣고 실행하기
+r1 = sess.run(x10_op, feed_dict = {a:[1, 2, 3, 4, 5]})
+print(r1)
+r2 = sess.run(x10_op, feed_dict = {a:[10, 20]})
+print(r2)
